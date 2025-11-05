@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Download video Sora 2 without watermark",
+  "version": "1.0.0",
+  "description": "Download Sora 2 videos without watermark.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "downloads",
+    "notifications",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://savesora.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sora 2 Downloader"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sora.com/*",
+        "https://*.sora.com/*",
+        "https://sora.chatgpt.com/*",
+        "https://*.openai.com/*sora*",
+        "https://openai.com/*sora*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
