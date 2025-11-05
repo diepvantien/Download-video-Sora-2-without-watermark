@@ -1,21 +1,37 @@
+# Download video Sora 2 without watermark (Chrome Extension)
 
-# Sora 2 Downloader (Chrome Extension)
+A lightweight Chrome/Edge/Brave extension to fetch and download Sora 2 videos without watermark. Supports two resolvers with automatic fallback.
 
-Download Sora 2 videos **không logo** (no watermark) bằng SaveSora API.
+- Option 1: SaveSora API resolver (primary)
+- Option 2: Direct link resolver (videos.openai.com / videosN.ss2.life) with quality ranking by Content-Length
 
-## Cách cài đặt (Chrome/Edge/Brave)
-1. Tải file ZIP và giải nén.
-2. Mở `chrome://extensions` → Bật **Developer mode** (Góc phải).
-3. Chọn **Load unpacked** → Trỏ tới thư mục đã giải nén.
+Note: Video must be public to download.
 
-## Cách dùng
-- Bấm icon extension → dán **link chia sẻ Sora** hoặc **URL tab hiện tại** → **Lấy link / Tải**.
-- Hoặc click chuột phải chọn **Download Sora video via SaveSora** trên trang/link.
-- Trên các trang có thẻ `<video>`, extension sẽ chèn nút **Download (SaveSora)** nổi.
+## Features
+- One‑click download from the popup or per‑video floating button on pages with <video>.
+- Method selector: Auto, Option 1, Option 2 (persists across sessions).
+- Auto‑fallback: if the preferred method fails, the other method is tried automatically.
+- Smart filename pattern with prompt/id/date/time and extension auto‑append (.mp4).
+- Saves directly to your default Downloads (no extra subfolders).
 
-## Kỹ thuật
-- Gọi `https://savesora.com/api/download-video-new` và tự bắt nhiều định dạng payload: `{url}`, `{link}`, `{videoUrl}`. Nếu thất bại sẽ fallback sang `GET ?url=`.
-- Tự động trích link `https://savesora.com/api/proxy-download?url=...` và tải bằng `chrome.downloads.download`.
-- Quyền truy cập: `downloads`, `contextMenus`, `activeTab`, và `host_permissions` cho `https://savesora.com/*`.
+## Install (Chrome/Edge/Brave)
+1. Download or clone this repository and extract the ZIP.
+2. Open `chrome://extensions` and enable Developer mode.
+3. Click “Load unpacked” and select the extracted folder.
 
-> Lưu ý: Tôn trọng bản quyền và điều khoản nền tảng. Chỉ tải video khi bạn có quyền hợp pháp.
+## Usage
+- Open the popup → paste the Sora share link (or use “Use tab URL”) → click the download icon.
+- Or right‑click on a page/link → “Download Sora video”.
+- On pages with `<video>`, a small floating teal button is injected for quick downloading.
+
+## Permissions
+- `downloads`, `contextMenus`, `activeTab`, `tabs`, `scripting`, `storage`
+- Host permissions: `https://savesora.com/*`
+
+## How it works (high level)
+- Option 1 calls SaveSora endpoints and extracts proxy download links, then probes mirrors.
+- Option 2 scans the active tab for direct candidates (OpenAI/ss2 mirrors), ranks by Content‑Length, and picks the largest (highest quality) URL.
+
+## Notes & Copyright
+- Please respect platform terms and intellectual property. Only download when you have the legal right.
+- ©2025 – Developed by DIEP VAN TIEN – Version mirrors the extension manifest.
